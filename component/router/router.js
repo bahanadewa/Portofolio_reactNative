@@ -9,9 +9,12 @@ Icon.loadFont();
 import MainPage from '../contain/mainMenu'
 import Cart from '../contain/cart'
 import Order from '../contain/order'
-// ============= MENU ====================
 
+
+// ============= MENU ====================
 import MenuDisplay from '../contain/menu'
+import LoginScreen from '../contain/LoginAndRegister/login'
+import RegisterScreen from '../contain/LoginAndRegister/register'
 
 
 const Menu = createStackNavigator({
@@ -50,9 +53,11 @@ const MainHome = createMaterialBottomTabNavigator({
 
 
 const AppNavigator = createStackNavigator({
-    mainHome : MainHome
+    mainHome : MainHome,
+    loginScreen : LoginScreen,
+    registerScreen : RegisterScreen
    },{
-     initialRouteName : "mainHome",
+     initialRouteName : "loginScreen",
      headerMode : 'none'
    });
  

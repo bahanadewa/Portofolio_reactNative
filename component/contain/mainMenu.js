@@ -40,7 +40,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "meat"})}>
                                 <Image source={Meat} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Beefs </Text>
+                                {/* <Text style={styles.imagesettingText}> Beef </Text> */}
                             </TouchableOpacity>
                         </View>
 
@@ -48,7 +48,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "chicken"})}>
                                 <Image source={Chicken} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Chickens </Text>
+                                {/* <Text style={styles.imagesettingText}> Chicken </Text> */}
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -58,7 +58,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "pasta"})}>
                                 <Image source={Pasta} style={styles.imagesetting}/>
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Pasta </Text>
+                                {/* <Text style={styles.imagesettingText}> Pasta </Text> */}
                             </TouchableOpacity>
                         </View>
 
@@ -66,7 +66,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "meat"})}>
                                 <Image source={Seafood} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Seafoods </Text>
+                                {/* <Text style={styles.imagesettingText}> Seafood </Text> */}
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -76,7 +76,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "beverage"})}>
                                 <Image source={Beverage} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Beverages </Text>
+                                {/* <Text style={styles.imagesettingText}> Beverage </Text> */}
                             </TouchableOpacity>
                         </View>
 
@@ -84,7 +84,7 @@ class MainMenu extends Component {
                             <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "dessert"})}>
                                 <Image source={Dessert} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
-                                <Text style={styles.imagesettingText}> Desserts </Text>
+                                {/* <Text style={styles.imagesettingText}> Desserts </Text> */}
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor : "#BFBFBF",
-        opacity : 0.5,
+        opacity : 0.3,
         height : "96%",
         width : "96%",
         borderRadius : 10
