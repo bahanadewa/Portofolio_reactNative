@@ -17,6 +17,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* my_projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* my_projectTests.m */; };
+		3B792C20239C07BA00894CC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B792C1F239C07BA00894CC5 /* GoogleService-Info.plist */; };
 		40E8F26D5F9032EEBC0B722E /* libPods-my_project.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64E3C96302D9D87F8DFE9AE /* libPods-my_project.a */; };
 		C211F034612A8B060D0384B2 /* libPods-my_projectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B020C8254EE327E567D6AE3D /* libPods-my_projectTests.a */; };
 		FA6F9242979E9B674B31087D /* libPods-my_project-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82DD81CE76822EBDAE81ED0F /* libPods-my_project-tvOS.a */; };
@@ -55,6 +56,7 @@
 		20355715B3C9AA47B3EB98A6 /* Pods-my_project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my_project.debug.xcconfig"; path = "Target Support Files/Pods-my_project/Pods-my_project.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* my_project-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "my_project-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* my_project-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "my_project-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B792C1F239C07BA00894CC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		469C34E3B4458B7177A4B497 /* Pods-my_projectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my_projectTests.debug.xcconfig"; path = "Target Support Files/Pods-my_projectTests/Pods-my_projectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F233997594BF001B3527F84 /* Pods-my_project-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my_project-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-my_project-tvOS/Pods-my_project-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6DCBBD2C2E1BDA177771322E /* Pods-my_project-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-my_project-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-my_project-tvOSTests/Pods-my_project-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		13B07FAE1A68108700A75B9A /* my_project */ = {
 			isa = PBXGroup;
 			children = (
+				3B792C1F239C07BA00894CC5 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -194,7 +197,6 @@
 				469C34E3B4458B7177A4B497 /* Pods-my_projectTests.debug.xcconfig */,
 				96E887E58DB9C50C988E51CD /* Pods-my_projectTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,6 +311,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -339,6 +342,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				3B792C20239C07BA00894CC5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +459,7 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -474,6 +479,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

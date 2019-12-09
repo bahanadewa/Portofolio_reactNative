@@ -7,7 +7,7 @@ import {
 } from "react-native";
 
 import {StackContainer} from './component/router/router'
-import Mainpage from '../my_project/component/contain/mainMenu'
+import Mainpage from '../my_project/component/contain/ProfileMenu/ProfileMenu'
 
 class componentName extends Component {
   render() {

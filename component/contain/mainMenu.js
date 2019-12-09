@@ -28,9 +28,9 @@ class MainMenu extends Component {
                         <Text style={styles.hearderText}> Hi, BAHANA DEWA </Text>
                     </View>
                     <View style={styles.headerView2}>
-                        <TouchableHighlight onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "meat"})}>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("menuProfile")}>
                             <Image source={User} style={styles.headerImage}/>
-                        </TouchableHighlight>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

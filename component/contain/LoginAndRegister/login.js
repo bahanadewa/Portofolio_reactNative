@@ -7,27 +7,45 @@ import {
     ImageBackground,
     SafeAreaView,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from "react-native";
-
+import {Firebase} from '../../firebase/firebase'
 import loginBackground from '../../image/loginBackround.jpeg'
 
 
 class Login extends Component {
+    state = {dataUser :[], username :[] , password :[]}
+
+    componentDidMount(){
+        var db = Firebase.database()
+        var dataRegister = db.ref('dataRegister')
+
+        dataRegister.on("value", (items)=>{
+            this.setState({dataUser : items.toJSON()})
+          }, (err) =>{
+              console.log(err)
+          })
+    }
 
     LoginAuth =()=>{
-        var username = this.username
-        var password = this.password 
+        var idArray = Object.keys(this.state.dataUser)
 
-        if (username==undefined && password==undefined){
-            // alert ("username dan password tidak boleh kosong")
-            this.props.navigation.navigate("mainHome")
-        }else if (username.toLocaleLowerCase() == "admin" && password.toLocaleLowerCase()== "admin"){
-            this.props.navigation.navigate("mainHome")
-        }else if(username!="admin" && password!="admin") {
-            // alert ("Username or Password is Incorrect")
-            this.props.navigation.navigate("mainHome")
+        for (var i= 0 ; i<idArray.length ; i++){
+            var dataID = idArray[i]
+            var isiDataID = [this.state.dataUser[dataID]]
+            for (var j= 0 ; j<isiDataID.length ; j++){
+                var nama = isiDataID[j].name
+                var pass = isiDataID[j].password
+            }
         }
+
+        var usernameInput = this.username
+        var passwordInput = this.password
+    
+        
+        this.props.navigation.navigate("mainHome")
+        
     }
 
     render() {
@@ -48,8 +66,8 @@ class Login extends Component {
                             <Text style={styles.TouchableHighlightText} >REGISTER</Text>
                         </TouchableOpacity>
                     </View>
-                  
                 </SafeAreaView>
+
 
             </ImageBackground> 
         );

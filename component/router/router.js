@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {createAppContainer} from 'react-navigation'
+import {createAppContainer,createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,9 +17,39 @@ import LoginScreen from '../contain/LoginAndRegister/login'
 import RegisterScreen from '../contain/LoginAndRegister/register'
 
 
+// ============= PROFILE ====================
+import ProfileMenu from '../contain/ProfileMenu/ProfileMenu'
+import EditProfile from '../contain/ProfileMenu/EditProfile'
+import ManageProduct from '../contain/ProfileMenu/ManageProduct'
+
+
+
+
+
+const Profile = createStackNavigator({
+      profileDisplay : ProfileMenu
+},{
+  headerMode : 'none'
+})
+
+const CartMenu = createStackNavigator({
+    cartDisplay : Cart
+})
+
+const OrderMenu = createStackNavigator({
+  orderDisplay : Order
+})
+
+
 const Menu = createStackNavigator({
-    menu : MainPage,
-    menuDisplay : MenuDisplay
+    menu :{
+        screen: MainPage,
+        navigationOptions:{
+          headerShown : false
+        }
+      },
+    menuDisplay : MenuDisplay,
+    menuProfile : Profile
 })
 
 const MainHome = createMaterialBottomTabNavigator({
@@ -31,13 +61,13 @@ const MainHome = createMaterialBottomTabNavigator({
              
             },
     CART : {
-            screen :Cart,
+            screen :CartMenu,
             navigationOptions : {
                   tabBarIcon: () =><Icon name="shopping-cart" size={20} color="#BFBFBF"/>
               }
             },
     ORDER : {
-      screen :Order,
+      screen :OrderMenu,
       navigationOptions : {
           tabBarIcon: () =><Icon name="shopping-bag" size={20} color="#BFBFBF"/>,
         },
@@ -52,7 +82,7 @@ const MainHome = createMaterialBottomTabNavigator({
 
 
 
-const AppNavigator = createStackNavigator({
+const AppNavigator = createSwitchNavigator({
     mainHome : MainHome,
     loginScreen : LoginScreen,
     registerScreen : RegisterScreen
