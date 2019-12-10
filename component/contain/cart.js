@@ -9,7 +9,7 @@ class Cart extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Cart</Text>
+                <Text>Cart Display</Text>
             </View>
         );
     }
