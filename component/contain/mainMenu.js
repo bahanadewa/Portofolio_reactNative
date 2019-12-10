@@ -9,6 +9,8 @@ import {
     Image
 } from "react-native";
 
+
+
 //====== IMAGE =======
 import Meat from '../image/meat.jpeg'
 import Chicken from '../image/chicken.jpeg'
@@ -18,9 +20,10 @@ import Pasta from '../image/pasta.jpeg'
 import Seafood from '../image/seafood.jpeg'
 import User from '../image/userphoto/bahanaa.png'
 
-
 class MainMenu extends Component {
+    
     render() {
+        
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
@@ -63,7 +66,7 @@ class MainMenu extends Component {
                         </View>
 
                         <View style={styles.view12}>
-                            <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "meat"})}>
+                            <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.props.navigation.navigate("menuDisplay",{type : "seafood"})}>
                                 <Image source={Seafood} style={styles.imagesetting} />
                                 <View style={styles.imagesettingView}></View>
                                 {/* <Text style={styles.imagesettingText}> Seafood </Text> */}

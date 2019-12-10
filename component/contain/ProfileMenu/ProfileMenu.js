@@ -26,7 +26,7 @@ class ProfileMenu extends Component {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.ImageBackgroundViewContain}>
-                            <TouchableOpacity style={styles.TouchableOpacity2}>
+                            <TouchableOpacity style={styles.TouchableOpacity2} onPress={()=>this.props.navigation.navigate("manageProductDisplay")}>
                                 <Image source={ProfileImageStorage} style={styles.TouchableOpacity1Image} />
                                 <Text style={styles.Text}>MANAGE PRODUCT </Text>
                             </TouchableOpacity>
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     TouchableOpacity1Image:{
-        height: "58%",
-        width:"37%",
+        height: "59%",
+        width:"33%",
        
     },
     TouchableOpacity2:{

@@ -42,9 +42,8 @@ class Login extends Component {
 
         var usernameInput = this.username
         var passwordInput = this.password
-    
-        
         this.props.navigation.navigate("mainHome")
+
         
     }
 

@@ -27,7 +27,9 @@ import ManageProduct from '../contain/ProfileMenu/ManageProduct'
 
 
 const Profile = createStackNavigator({
-      profileDisplay : ProfileMenu
+      profileDisplay : ProfileMenu,
+      editProfileDisplay : EditProfile,
+      manageProductDisplay : ManageProduct
 },{
   headerMode : 'none'
 })
@@ -82,7 +84,7 @@ const MainHome = createMaterialBottomTabNavigator({
 
 
 
-const AppNavigator = createSwitchNavigator({
+const AppNavigator = createStackNavigator({
     mainHome : MainHome,
     loginScreen : LoginScreen,
     registerScreen : RegisterScreen
