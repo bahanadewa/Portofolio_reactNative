@@ -5,18 +5,56 @@ import {
     StyleSheet,
     ScrollView,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Modal,
+    Button,
+    SafeAreaView,
+    ImageBackground
 } from "react-native";
 import { FlatGrid } from 'react-native-super-grid';
 import dataMenu from '../support/data'
+import modalBackground from '../image/modalBackground.jpeg'
 
 
 class Menu extends Component {
-    state = {data : dataMenu, type:"" }
+    state = {data : dataMenu, type:"",modalVisible: false, name:"", picture:"", price:"", detail:"" }
 
+    
     componentDidMount=()=>{
         const { navigation } = this.props;
         this.setState({type:navigation.getParam('type')})
+    }
+
+    openModal=(name, picture, price, detail)=>{
+        this.setState({modalVisible:true, name:name, picture:picture, price:price, detail:detail });
+        this.modalData()
+    }
+
+    modalData=()=>{
+            return(
+                <View style={styles.innerContainer}>
+                    <View style={styles.innerContainerView}>
+                        <Image source={{uri : this.state.picture}} style={{width:"90%", height:"50%",borderRadius:20}}/>
+                        <View style={styles.modalView}>
+                            <Text style={{fontSize:22, marginBottom:"4%"}}>{this.state.name}</Text> 
+                            <Text style={{fontSize:19,marginBottom:"4%"}}>IDR {this.state.price}</Text> 
+                            <Text style={{fontSize:16, marginBottom:"2%",fontWeight:"bold",textAlign:"center", textDecorationLine:"underline"}}> Description </Text> 
+                            <Text style={{fontSize:16, textAlign:"justify"}}>{this.state.detail}</Text> 
+                        </View>
+                    </View>
+                    <View style={styles.TouchableOpacityModalView}>
+                        <TouchableOpacity onPress={() => this.closeModal()} style={styles.TouchableOpacityModal}>
+                            <Text style={{color:"white", fontSize:16, fontWeight:"800"}}>
+                                BACK
+                            </Text>
+                        </TouchableOpacity>          
+                    </View>
+                </View>
+        )
+    }
+        
+    closeModal=()=> {
+    this.setState({modalVisible:false});
     }
 
     itemContain = ()=>{
@@ -35,9 +73,14 @@ class Menu extends Component {
                             <Text style={styles.viewContainViewText2}>IDR {item.idr}</Text>
                         </View>
                     </View>
-
                     <View style={{width:"100%",height:25,justifyContent:"center", alignItems:"center"}}>
-                        <TouchableOpacity style={styles.TouchableOpacity}> 
+                        <TouchableOpacity style={styles.TouchableOpacity} 
+                                onPress={() => this.openModal(
+                                    name=item.name,
+                                    picture=item.picture,
+                                    price = item.idr,
+                                    detail = item.detail
+                                    )}> 
                                     <Text style={styles.TouchableOpacityText}> Add To Cart </Text>
                         </TouchableOpacity>
                     </View>
@@ -49,11 +92,19 @@ class Menu extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <ScrollView style={{maxHeight:"100%", width:"100%"}}>
                         {this.itemContain()}
+                        <Modal
+                            visible={this.state.modalVisible}
+                            animationType={'slide'}
+                            onRequestClose={() => this.closeModal()}>
+                                <ImageBackground source={modalBackground} style={styles.modalContainer}>
+                                    {this.modalData()}
+                                </ImageBackground>   
+                        </Modal>
                 </ScrollView>
-            </View>
+            </SafeAreaView>
         );
     }
 }
@@ -96,5 +147,42 @@ const styles = StyleSheet.create({
     TouchableOpacityText:{
         color : "#A63005",
         fontWeight : "400"
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    innerContainer: {
+        alignItems: 'center',
+        height:"90%"
+    },
+    TouchableOpacityModalView:{
+        height :"10%",
+        width:"100%",
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    innerContainerView:{
+        alignItems:"center",
+        height:"90%",
+        width:"100%",
+    },
+    TouchableOpacityModal:{
+        justifyContent:"center",
+        alignItems:"center",
+        height:"60%",
+        width: "70%",
+        backgroundColor: "#F28E13",
+        borderRadius : 10
+    },
+    modalView:{
+        alignItems:"center", 
+        width:"90%",
+        height :"45%",
+        top :"4%",
+        padding : "2%",
+        backgroundColor :"white",
+        opacity : 0.7,
+        borderRadius:20
     }
 });
