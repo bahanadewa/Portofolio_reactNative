@@ -38,8 +38,8 @@ class Cart extends Component {
                     <View style={{width:"100%", height:"100%", justifyContent:"center", alignItems:"center"}}>
                         <Text style={{color:"white", fontSize:16}}>{this.state.cartList.length} Packages</Text>
                         <Text style={{color:"white", fontSize:16}}>IDR {total} </Text>
-                        <TouchableOpacity style={{backgroundColor:"grey",height:30, borderRadius:5, borderRadius:3, justifyContent:"center", alignItems:"center"}}> 
-                            <Text style={{color:"white"}}> Checkout </Text> 
+                        <TouchableOpacity style={{backgroundColor:"#8C2E2E",height:30, borderRadius:5, borderRadius:3, justifyContent:"center", alignItems:"center"}}> 
+                            <Text style={{color:"white", fontWeight:"600"}}> Checkout </Text> 
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         width:"100%",
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
-        backgroundColor :"#1D3D59",
+        backgroundColor :"#BF4E4E",
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal:5,
