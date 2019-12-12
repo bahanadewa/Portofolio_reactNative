@@ -7,20 +7,40 @@ import {
     TextInput,
 } from "react-native";
 import { Dropdown } from 'react-native-material-dropdown';
+import {Firebase} from '../../firebase/firebase'
 
 class ManageProduct extends Component {
 
     Add =()=>{
-        var category = this.category
-        alert(category)
+    var db = Firebase.database()
+    var masterProduct = db.ref("masterProduct")
+    var nameProduct = this.nameProduct.toUpperCase()
+    var priceProduct =this.priceProduct
+    var description = this.description
+    var category =this.category
+    var imageProduct =this.imageProduct
+
+        masterProduct.push({
+            nameProduct,
+            priceProduct,
+            description,
+            category,
+            imageProduct
+        }).then(()=>{
+            console.log("MASUK")
+        }).catch((error)=>{
+            console.log(error)
+        })
+        // var category = this.category
+        // alert(category)
     }
    
     render() {
         var data = [
             {value: 'meat'},
             {value: 'chicken'},
-            { value: 'pasta'},
-            { value: 'seafood'},
+            {value: 'pasta'},
+            {value: 'seafood'},
             {value: 'beverage'},
             {value: 'dessert'}
         ];
@@ -28,15 +48,15 @@ class ManageProduct extends Component {
             <View style={styles.container}>
                 <View style={styles.containerView}>
                     <Text style={styles.containerViewText}> Nama Product </Text>
-                    <TextInput style={styles.containerViewTextInput} placeholder="Nama Product"/>
+                    <TextInput style={styles.containerViewTextInput} onChangeText={(value)=>this.nameProduct = value} placeholder="Nama Product"/>
                 </View>
                 <View style={styles.containerView}>
                     <Text style={styles.containerViewText}> Harga </Text>
-                    <TextInput style={styles.containerViewTextInput} keyboardType={"numeric"} placeholder="Harga Product"/>
+                    <TextInput style={styles.containerViewTextInput} onChangeText={(value)=>this.priceProduct = value} keyboardType={"numeric"} placeholder="Harga Product"/>
                 </View>
                 <View style={styles.containerView}>
                     <Text style={styles.containerViewText}> Description </Text>
-                    <TextInput style={styles.containerViewTextInput}  placeholder="Product Description"/>
+                    <TextInput style={styles.containerViewTextInput} maxLength={350} onChangeText={(value)=>this.description = value} placeholder="Product Description"/>
                 </View>
                 <View style={styles.containerView}>
                     <Text style={styles.containerViewText}> Kategory </Text>
@@ -50,7 +70,7 @@ class ManageProduct extends Component {
                 </View>
                 <View style={styles.containerView}>
                     <Text style={styles.containerViewText}> Image </Text>
-                    <TextInput style={styles.containerViewTextInput} placeholder="Product Image"/>
+                    <TextInput style={styles.containerViewTextInput} onChangeText={(value)=>this.imageProduct = value} placeholder="Product Image"/>
                 </View>
                 <View style={styles.View}>
                     <TouchableOpacity style={styles.TouchableOpacity} onPress={()=>this.Add()}>

@@ -8,7 +8,6 @@ import {
     SafeAreaView,
     TextInput,
     TouchableOpacity,
-    DatePickerIOS
 } from "react-native";
 
 import {Firebase} from '../../firebase/firebase'
@@ -19,18 +18,20 @@ class Register extends Component {
 
     addNewUser = ()=>{
     var db = Firebase.database()
-    var dataRegister = db.ref('dataRegister')
+    var dataRegister = db.ref("userMaster")
     
     var name  = this.name.toLowerCase()
     var email  = this.email
     var username  = this.username.toLowerCase()
     var password  = this.password
+    var author = "user"
 
     dataRegister.push({
         name,
         email,
         username,
-        password
+        password,
+        author
     }).then(()=>{
         console.log("MASUK")
     }).catch((error)=>{

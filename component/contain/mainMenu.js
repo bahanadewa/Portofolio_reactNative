@@ -31,7 +31,7 @@ class MainMenu extends Component {
                         <Text style={styles.hearderText}> Hi, BAHANA DEWA </Text>
                     </View>
                     <View style={styles.headerView2}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate("menuProfile")}>
+                        <TouchableOpacity>
                             <Image source={User} style={styles.headerImage}/>
                         </TouchableOpacity>
                     </View>

@@ -9,9 +9,11 @@ import {
     Modal,
     Button,
     SafeAreaView,
-    ImageBackground
+    ImageBackground,
+    TextInput
 } from "react-native";
 import { FlatGrid } from 'react-native-super-grid';
+import {Firebase} from '../firebase/firebase'
 import dataMenu from '../support/data'
 import modalBackground from '../image/modalBackground.jpeg'
 
@@ -36,10 +38,25 @@ class Menu extends Component {
                     <View style={styles.innerContainerView}>
                         <Image source={{uri : this.state.picture}} style={{width:"90%", height:"50%",borderRadius:20}}/>
                         <View style={styles.modalView}>
-                            <Text style={{fontSize:22, marginBottom:"4%"}}>{this.state.name}</Text> 
-                            <Text style={{fontSize:19,marginBottom:"4%"}}>IDR {this.state.price}</Text> 
-                            <Text style={{fontSize:16, marginBottom:"2%",fontWeight:"bold",textAlign:"center", textDecorationLine:"underline"}}> Description </Text> 
-                            <Text style={{fontSize:16, textAlign:"justify"}}>{this.state.detail}</Text> 
+                            <View style={{height:"85%",width:"95%"}}>
+                                <Text style={{fontSize:22, marginBottom:"4%", fontWeight:"600"}}>{this.state.name}</Text> 
+                                <Text style={{fontSize:19,marginBottom:"4%"}}>IDR {this.state.price}</Text> 
+                                <Text style={{fontSize:16, marginBottom:"2%",fontWeight:"bold",textAlign:"center", textDecorationLine:"underline"}}> Description </Text> 
+                                <Text style={{fontSize:16, textAlign:"justify", maxHeight:"45%"}}>{this.state.detail}</Text> 
+                            </View>
+                            <View style={{height:"15%", width:"100%", alignItems:"center", justifyContent:"center", flexDirection:"row"}}>
+                                <TextInput placeholder="QTY"  onChangeText={(value)=>this.qty = value} keyboardType={"number-pad","numbers-and-punctuation"}  placeholderTextColor="black" maxLength={3} style={{width:"30%",height:"80%",borderRadius:5 ,textAlign:"center", backgroundColor:"grey", margin:2}}/>
+                                <TouchableOpacity style={{width:"30%",height:"80%" ,borderRadius:5, justifyContent:"center", alignItems:"center", margin:2, backgroundColor:"#F28E13"}}
+                                    onPress={() => this.addProduct(
+                                        this.state.picture,
+                                        this.state.name,
+                                        this.state.price,
+                                        this.qty
+                                    )}>
+                                    <Text style={{color:"white", fontWeight:"600"}}>BUY</Text>
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
                     </View>
                     <View style={styles.TouchableOpacityModalView}>
@@ -90,6 +107,26 @@ class Menu extends Component {
 
     }
 
+    addProduct = (productImg,productName,productPrice,productQty)=>{
+        var db = Firebase.database()
+        var dataCart = db.ref("chartMaster")
+
+    
+        dataCart.push({
+            productImg,
+            productName,
+            productPrice,
+            productQty
+        }).then(()=>{
+            console.log("MASUK")
+        }).catch((error)=>{
+            console.log(error)
+        })
+    
+        }
+
+
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -97,7 +134,7 @@ class Menu extends Component {
                         {this.itemContain()}
                         <Modal
                             visible={this.state.modalVisible}
-                            animationType={'slide'}
+                            animationType={"slide"}
                             onRequestClose={() => this.closeModal()}>
                                 <ImageBackground source={modalBackground} style={styles.modalContainer}>
                                     {this.modalData()}

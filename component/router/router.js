@@ -36,6 +36,8 @@ const Profile = createStackNavigator({
 
 const CartMenu = createStackNavigator({
     cartDisplay : Cart
+},{
+  headerMode : 'none'
 })
 
 const OrderMenu = createStackNavigator({
@@ -68,7 +70,7 @@ const MainHome = createMaterialBottomTabNavigator({
                   tabBarIcon: () =><Icon name="shopping-cart" size={20} color="#BFBFBF"/>
               }
             },
-    ORDER : {
+    HISTORY : {
       screen :OrderMenu,
       navigationOptions : {
           tabBarIcon: () =><Icon name="shopping-bag" size={20} color="#BFBFBF"/>,

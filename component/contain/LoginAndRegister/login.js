@@ -15,33 +15,36 @@ import loginBackground from '../../image/loginBackround.jpeg'
 
 
 class Login extends Component {
-    state = {dataUser :[], username :[] , password :[]}
+    state = {dataUser :[],usernameState:null, passwordState:null}
 
     componentDidMount(){
         var db = Firebase.database()
-        var dataRegister = db.ref('dataRegister')
+        var dataRegister = db.ref('userMaster')
 
         dataRegister.on("value", (items)=>{
-            this.setState({dataUser : items.toJSON()})
+            this.setState({dataUser : items.val()})
           }, (err) =>{
               console.log(err)
           })
     }
 
     LoginAuth =()=>{
-        var idArray = Object.keys(this.state.dataUser)
+        // var idArray = Object.keys(this.state.dataUser)
+        // var usernameInput = this.username.toLowerCase()
+        // var passwordInput = this.password
 
-        for (var i= 0 ; i<idArray.length ; i++){
-            var dataID = idArray[i]
-            var isiDataID = [this.state.dataUser[dataID]]
-            for (var j= 0 ; j<isiDataID.length ; j++){
-                var nama = isiDataID[j].name
-                var pass = isiDataID[j].password
-            }
-        }
+        // for (var i= 0 ; i<idArray.length ; i++){
+        //     var dataID = idArray[i]
+        //     var isiDataID = [this.state.dataUser[dataID]]
+        //     for (var j= 0 ; j<isiDataID.length ; j++){
+        //         var nama = isiDataID[j].name
+        //         var pass = isiDataID[j].password
+        //         if(usernameInput==nama && passwordInput==pass){
+        //             this.props.navigation.navigate("mainHome")
+        //         }  
+        //     }
+        // }    
 
-        var usernameInput = this.username
-        var passwordInput = this.password
         this.props.navigation.navigate("mainHome")
 
         
