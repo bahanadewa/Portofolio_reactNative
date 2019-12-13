@@ -49,7 +49,7 @@ class Menu extends Component {
                                 <TouchableOpacity style={{width:"30%",height:"80%" ,borderRadius:5, justifyContent:"center", alignItems:"center", margin:2, backgroundColor:"#F28E13"}}
                                     onPress={() => this.addProduct(
                                         this.state.picture,
-                                        this.state.name,
+                                        this.state.name.toUpperCase(),
                                         this.state.price,
                                         this.qty
                                     )}>

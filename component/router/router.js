@@ -8,7 +8,7 @@ Icon.loadFont();
 // ============= MAIN MENU ====================
 import MainPage from '../contain/mainMenu'
 import Cart from '../contain/cart'
-import Order from '../contain/order'
+import Order from '../contain/history'
 
 
 // ============= MENU ====================

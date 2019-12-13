@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from "react-native";
 
-class Order extends Component {
+class History extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -14,7 +14,7 @@ class Order extends Component {
         );
     }
 }
-export default Order;
+export default History;
 
 const styles = StyleSheet.create({
     container: {
