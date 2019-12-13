@@ -19,6 +19,7 @@ import Beverage from '../image/beverage.jpeg'
 import Pasta from '../image/pasta.jpeg'
 import Seafood from '../image/seafood.jpeg'
 import User from '../image/userphoto/bahanaa.png'
+import {connect} from 'react-redux'
 
 class MainMenu extends Component {
     
@@ -28,7 +29,7 @@ class MainMenu extends Component {
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.headerView1}>
-                        <Text style={styles.hearderText}> Hi, BAHANA DEWA </Text>
+                        <Text style={styles.hearderText}> Hi, {this.props.username}</Text>
                     </View>
                     <View style={styles.headerView2}>
                         <TouchableOpacity>
@@ -96,7 +97,13 @@ class MainMenu extends Component {
         );
     }
 }
-export default MainMenu;
+
+const mapStateToProp = (state)=>{
+    return{
+       username : state.auth.username,
+    }
+}
+export default connect(mapStateToProp) (MainMenu)
 
 const styles = StyleSheet.create({
     container: {

@@ -12,12 +12,13 @@ import {Firebase} from '../firebase/firebase'
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/FontAwesome';
 Icon.loadFont();
+import {connect} from 'react-redux'
 
 class Cart extends Component {
     state = {cartList :[], price:[]}
     componentDidMount=()=>{
         var db = Firebase.database()
-        var dataCart = db.ref('chartMaster')
+        var dataCart = db.ref('chartMaster/'+this.props.username)
 
         dataCart.on("value", (items)=>{
             this.setState({cartList : (items.val())})
@@ -54,9 +55,9 @@ class Cart extends Component {
     checkout=(item)=>{
         var datee = new Date()
         var time = datee.getTime()
-        alert("checkout")
+      
         var db = Firebase.database()
-        var dataCheckout = db.ref("dataCheckout/"+"CHRT"+time)
+        var dataCheckout = db.ref("dataCheckout/"+this.props.username)
         var dataHistory = this.state.cartList
         dataCheckout.push({
            item
@@ -69,7 +70,7 @@ class Cart extends Component {
 
     deleteItem=(id)=>{
         var db = Firebase.database()
-        var dataCart = db.ref('chartMaster')
+        var dataCart = db.ref('chartMaster/'+this.props.username)
         Alert.alert("Delete this item",
         ("are you sure ?"),
         [{text : "Yes ", onPress : ()=> dataCart.child(id).remove()},
@@ -109,17 +110,24 @@ class Cart extends Component {
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                <ScrollView style={styles.ScrollView}>
-                    {this.listView()}
-                </ScrollView>
+                    <ScrollView style={styles.ScrollView}>
+                        {this.listView()}
+                    </ScrollView>
                 <View style={styles.detailCart}>
-                    {this.listTotalItem()}
+                        {this.listTotalItem()}
                 </View>
             </SafeAreaView>
         );
     }
 }
-export default Cart;
+
+const mapStateToProp = (state)=>{
+    return{
+       username : state.auth.username,
+    }
+}
+export default connect(mapStateToProp) (Cart)
+// export default Cart;
 
 const styles = StyleSheet.create({
     container: {

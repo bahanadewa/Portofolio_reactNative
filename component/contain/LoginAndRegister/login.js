@@ -10,8 +10,11 @@ import {
     TouchableOpacity,
     ScrollView
 } from "react-native";
+import {connect} from 'react-redux'
+import {onLoginSuccess} from '../../support/actionAndReducer/2.action'
 import {Firebase} from '../../firebase/firebase'
 import loginBackground from '../../image/loginBackround.jpeg'
+import {StackActions,NavigationActions} from 'react-navigation'
 
 
 class Login extends Component {
@@ -28,10 +31,40 @@ class Login extends Component {
           })
     }
 
+    componentDidUpdate(){
+        if(this.props.username !== ""){
+            const resetAction = StackActions.reset({
+                index : 0,
+                actions : [ NavigationActions.navigate({routeName : 'mainHome'})]
+            })
+            this.props.navigation.dispatch(resetAction)
+        }
+    }
+
     LoginAuth =()=>{
-        // var idArray = Object.keys(this.state.dataUser)
-        // var usernameInput = this.username.toLowerCase()
-        // var passwordInput = this.password
+        var idArray = Object.keys(this.state.dataUser)
+
+        var usernameInput = this.username
+        var passwordInput = this.password
+        if (usernameInput==undefined && passwordInput==undefined){
+            alert("semua harus di isi")
+        }else if(usernameInput!="" && passwordInput!=""){
+              for (var i= 0 ; i<idArray.length ; i++){
+                var dataID = idArray[i]
+                var isiDataID = [this.state.dataUser[dataID]]
+                for (var j= 0 ; j<isiDataID.length ; j++){
+                    var username = isiDataID[j].name
+                    var password = isiDataID[j].password
+                    var author = isiDataID[j].author
+                    var email = isiDataID[j].email
+                    if(usernameInput.toLowerCase()==username && passwordInput==password){
+                        // this.props.navigation.navigate("mainHome")
+                        this.props.onLoginSuccess((username))
+
+                    }  
+                }
+            } 
+        }
 
         // for (var i= 0 ; i<idArray.length ; i++){
         //     var dataID = idArray[i]
@@ -45,9 +78,7 @@ class Login extends Component {
         //     }
         // }    
 
-        this.props.navigation.navigate("mainHome")
-
-        
+        // this.props.navigation.navigate("mainHome")
     }
 
     render() {
@@ -75,7 +106,13 @@ class Login extends Component {
         );
     }
 }
-export default Login;
+
+const mapStateToProp = (state)=>{
+    return{
+       username : state.auth.username,
+    }
+}
+export default connect(mapStateToProp,{onLoginSuccess}) (Login)
 
 const styles = StyleSheet.create({
     container: {

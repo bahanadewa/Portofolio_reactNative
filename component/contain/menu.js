@@ -16,6 +16,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import {Firebase} from '../firebase/firebase'
 import dataMenu from '../support/data'
 import modalBackground from '../image/modalBackground.jpeg'
+import {connect} from 'react-redux'
 
 
 class Menu extends Component {
@@ -109,7 +110,7 @@ class Menu extends Component {
 
     addProduct = (productImg,productName,productPrice,productQty)=>{
         var db = Firebase.database()
-        var dataCart = db.ref("chartMaster")
+        var dataCart = db.ref("chartMaster/"+this.props.username)
 
     
         dataCart.push({
@@ -145,7 +146,14 @@ class Menu extends Component {
         );
     }
 }
-export default Menu;
+
+const mapStateToProp = (state)=>{
+    return{
+       username : state.auth.username,
+    }
+}
+export default connect(mapStateToProp) (Menu)
+// export default Menu;
 
 const styles = StyleSheet.create({
     container: {
