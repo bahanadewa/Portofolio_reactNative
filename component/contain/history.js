@@ -22,7 +22,8 @@ class History extends Component {
         var dataCart = db.ref('dataCheckout/'+this.props.username)
 
         dataCart.on("value", (items)=>{
-            this.setState({cartList : Object.values(Object.values(items.val())[0].item)})
+            // this.setState({cartList : Object.values(Object.values(items.val())[0])})
+            console.log((Object.values(items.val())[0]))
           }, (err) =>{
             console.log(err)
           })
