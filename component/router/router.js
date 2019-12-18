@@ -42,6 +42,8 @@ const CartMenu = createStackNavigator({
 
 const OrderMenu = createStackNavigator({
   orderDisplay : Order
+},{
+  headerMode : 'none'
 })
 
 

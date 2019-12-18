@@ -60,7 +60,6 @@ class Login extends Component {
                     if(usernameInput.toLowerCase()==username && passwordInput==password){
                         // this.props.navigation.navigate("mainHome")
                         this.props.onLoginSuccess((username))
-
                     }  
                 }
             } 

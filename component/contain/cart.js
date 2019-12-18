@@ -13,6 +13,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Icon from 'react-native-vector-icons/FontAwesome';
 Icon.loadFont();
 import {connect} from 'react-redux'
+import emptyCart from '../image/empty-cart.png'
 
 class Cart extends Component {
     state = {cartList :[], price:[]}
@@ -21,52 +22,60 @@ class Cart extends Component {
         var dataCart = db.ref('chartMaster/'+this.props.username)
 
         dataCart.on("value", (items)=>{
-            this.setState({cartList : (items.val())})
-            console.log(items.val())
+            if((items!=null || items!=undefined)){
+                this.setState({cartList : (items.val())})
+            }else{
+                console.log("kosong")
+            }
+            // console.log(Object.values(items.val())[0].productImg)
           }, (err) =>{
             console.log(err)
           })
     }
 
+
     listTotalItem=()=>{
-            let productPrice = Object.values(this.state.cartList).map(({ productPrice }) => productPrice)
-            let productQty = Object.values(this.state.cartList).map(({ productQty }) => productQty)
-            var total = 0
+            if(this.state.cartList!==null){
+                let productPrice = Object.values(this.state.cartList).map(({ productPrice }) => productPrice)
+                let productQty = Object.values(this.state.cartList).map(({ productQty }) => productQty)
+                var total = 0
 
-            for(var i=0;i<productPrice.length;i++){
-                total += parseInt(productPrice[i]*productQty[i])
-            }
+                for(var i=0;i<productPrice.length;i++){
+                    total += parseInt(productPrice[i]*productQty[i])
+                }
 
-            return(
-            <View style={{flexDirection:"row", alignItems:"center", margin:5, height:"100%", width:"100%"}}>
-                <View style={{width:"100%", height:"100%", justifyContent:"center", alignItems:"center"}}>
+                return(
+                <View style={{flexDirection:"row", alignItems:"center", margin:5, height:"100%", width:"100%"}}>
                     <View style={{width:"100%", height:"100%", justifyContent:"center", alignItems:"center"}}>
-                        <Text style={{color:"white", fontSize:16}}>{Object.values(this.state.cartList).length} Packages</Text>
-                        <Text style={{color:"white", fontSize:16}}>IDR {total} </Text>
-                        <TouchableOpacity  onPress={()=>this.checkout(this.state.cartList)}style={{backgroundColor:"#8C2E2E",height:30, borderRadius:5, borderRadius:3, justifyContent:"center", alignItems:"center"}}> 
-                            <Text style={{color:"white", fontWeight:"600"}}> Checkout </Text> 
-                        </TouchableOpacity>
+                        <View style={{width:"100%", height:"100%", justifyContent:"center", alignItems:"center"}}>
+                            <Text style={{color:"white", fontSize:16}}>{Object.values(this.state.cartList).length} Packages</Text>
+                            <Text style={{color:"white", fontSize:16}}>IDR {total} </Text>
+                            <TouchableOpacity  onPress={
+                                    ()=>this.checkout((this.state.cartList))
+                                        }style={{backgroundColor:"#8C2E2E",height:30, borderRadius:5, borderRadius:3, justifyContent:"center", alignItems:"center"}}> 
+                                <Text style={{color:"white", fontWeight:"600"}}> Checkout </Text> 
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-            </View>
-            )
+                )
+            }
     }
 
     checkout=(item)=>{
         var datee = new Date()
-        var time = datee.getTime()
-      
         var db = Firebase.database()
         var dataCheckout = db.ref("dataCheckout/"+this.props.username)
-        var dataHistory = this.state.cartList
         dataCheckout.push({
-           item
+            item
         }).then(()=>{
+            db.ref('chartMaster/'+this.props.username).remove()
             console.log("MASUK")
         }).catch((error)=>{
             console.log(error)
         })
     }
+
 
     deleteItem=(id)=>{
         var db = Firebase.database()
@@ -78,41 +87,49 @@ class Cart extends Component {
     }
 
     listView=()=>{
-        var jsx = Object.keys(this.state.cartList).map((val)=>{
-            return(
-            <View style={styles.ViewScrollView}>
-                <View style={styles.ViewScrollViewContain}>
-                    <View style={{width:"25%",height:"100%" ,justifyContent:"center", alignItems:"center"}}>
-                        <Image source={{url: this.state.cartList[val].productImg}} style={{height:"85%", width:"80%"}}/>
-                    </View>
-                    <View style={{width:"75%",height:"100%"}}>
-                            <Text style={{fontSize:12, width:"100%",height:"35%", padding:2, fontWeight:"600"}}>{this.state.cartList[val].productName}</Text>
-                            <View style={{width:"100%",height:"65%", flexDirection:"row"}}>
-                                <View style={{width:"70%",justifyContent:"center"}}>
-                                    <Text style={{fontSize:11, width:"100%",height:"30%"}}>IDR {this.state.cartList[val].productPrice}/Pack</Text>
-                                    <Text style={{fontSize:11, width:"100%",height:"30%"}}>Qty {this.state.cartList[val].productQty}</Text>
-                                    <Text style={{fontSize:12, width:"100%",height:"30%"}}>Total {this.state.cartList[val].productPrice*this.state.cartList[val].productQty}</Text>
-                                </View>
-                                <View style={{width:"30%",justifyContent:"center", alignItems:"center"}}>
-                                    <TouchableOpacity onPress={()=>this.deleteItem(val)} >
-                                        <Icon name="trash" size={30} color="#8C2E2E"/>
-                                    </TouchableOpacity>
-                                </View>
+        if(this.state.cartList!==null){
+            var jsx = Object.keys(this.state.cartList).map((val)=>{
+                return(  
+                <View style={styles.ViewScrollView}>
+                    <View style={styles.ViewScrollViewContain}>
+                        <View style={{width:"25%",height:"100%" ,justifyContent:"center", alignItems:"center"}}>
+                            <Image source={{url: this.state.cartList[val].productImg}} style={{height:"85%", width:"80%"}}/>
+                        </View>
+                        <View style={{width:"75%",height:"100%"}}>
+                                <Text style={{fontSize:12, width:"100%",height:"35%", padding:2, fontWeight:"600"}}>{this.state.cartList[val].productName}</Text>
+                                <View style={{width:"100%",height:"65%", flexDirection:"row"}}>
+                                    <View style={{width:"70%",justifyContent:"center"}}>
+                                        <Text style={{fontSize:11, width:"100%",height:"30%"}}>IDR {this.state.cartList[val].productPrice}/Pack</Text>
+                                        <Text style={{fontSize:11, width:"100%",height:"30%"}}>Qty {this.state.cartList[val].productQty}</Text>
+                                        <Text style={{fontSize:12, width:"100%",height:"30%"}}>Total {this.state.cartList[val].productPrice*this.state.cartList[val].productQty}</Text>
+                                    </View>
+                                    <View style={{width:"30%",justifyContent:"center", alignItems:"center"}}>
+                                        <TouchableOpacity onPress={()=>this.deleteItem(val)} >
+                                            <Icon name="trash" size={30} color="#8C2E2E"/>
+                                        </TouchableOpacity>
+                                    </View>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
+                )
+            })
+            return jsx
+        }else{
+            return(
+                <View style={{height:"600%",width:"100%",justifyContent:"center", alignItems:"center"}}>
+                    <Image source={emptyCart} style={{height:100, width:200}}/>
+                </View>
             )
-        })
-        return jsx
+        }
     }
 
     render() {
         return (
             <SafeAreaView style={styles.container}>
-                    <ScrollView style={styles.ScrollView}>
-                        {this.listView()}
-                    </ScrollView>
+                <ScrollView style={styles.ScrollView}>
+                    {this.listView()}
+                </ScrollView>
                 <View style={styles.detailCart}>
                         {this.listTotalItem()}
                 </View>
