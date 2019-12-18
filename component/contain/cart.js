@@ -63,7 +63,6 @@ class Cart extends Component {
     }
 
     checkout=(item)=>{
-        var datee = new Date()
         var db = Firebase.database()
         var dataCheckout = db.ref("dataCheckout/"+this.props.username)
         dataCheckout.push({
