@@ -27,7 +27,6 @@ class Cart extends Component {
             }else{
                 console.log("kosong")
             }
-            // console.log(Object.values(items.val())[0].productImg)
           }, (err) =>{
             console.log(err)
           })
@@ -63,13 +62,17 @@ class Cart extends Component {
     }
 
     checkout=(item)=>{
+        var getDate = new Date()
+        var date = getDate.getDate()
+        var month = getDate.getMonth()+1
+        var year = getDate.getFullYear()
+        var dateLong = getDate.getTime() 
         var db = Firebase.database()
-        var dataCheckout = db.ref("dataCheckout/"+this.props.username)
+        var dataCheckout = db.ref("dataCheckout/"+this.props.username+"/OB"+date+month+year+dateLong)
         dataCheckout.push({
             item
         }).then(()=>{
             db.ref('chartMaster/'+this.props.username).remove()
-            console.log("MASUK")
         }).catch((error)=>{
             console.log(error)
         })
@@ -143,7 +146,6 @@ const mapStateToProp = (state)=>{
     }
 }
 export default connect(mapStateToProp) (Cart)
-// export default Cart;
 
 const styles = StyleSheet.create({
     container: {
@@ -184,6 +186,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         borderRadius:3,
         borderColor : "gray",
-    }
+    },
+    
 
 });
