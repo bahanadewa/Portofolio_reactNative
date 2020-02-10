@@ -86,7 +86,7 @@ const dataMenu = [
         picture: 'https://d1doqjmisr497k.cloudfront.net/-/media/mccormick-us/recipes/mccormick/s/2000/slow-cooker-corned-beef-and-cabbage.jpg',
         idr : "65000",
         detail : `'Use your slow cooker to simmer this traditional one-pot Irish meal during the day. 
-                    You and your family will be sitting down to perfectly cooked corned beef and cabbage for dinner.'`,
+        You and your family will be sitting down to perfectly cooked corned beef and cabbage for dinner.'`,
         type : 'meat'
         },
     {
